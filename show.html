@@ -19,6 +19,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      text-align: center;
       padding: 1rem;
       max-width: 600px;
       margin: 0 auto;
@@ -28,20 +29,34 @@
       margin-top: 1.5rem;
       margin-bottom: 1rem;
     }
-    h1 {
+    .pet-name {
       font-size: 2rem;
-      margin: 1.5rem 0 1rem;
-      color: #000;
+      font-weight: bold;
+      letter-spacing: 1px;
+      margin-bottom: 0.3rem;
+      text-transform: uppercase;
+    }
+    .found-label {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      color: #666;
+    }
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
     }
     .info {
-      font-size: 1.25rem;
-      margin: 1rem 0;
+      font-size: 1.1rem;
+      margin: 0.2rem 0;
+    }
+    .contact-info {
+      margin-top: auto;
+      margin-bottom: 1rem;
     }
     .button-container {
-      width: 100%;
-      text-align: center;
-      padding: 2rem 0;
-      margin-top: auto;
+      margin-bottom: 2rem;
     }
     .button {
       padding: 1rem 2rem;
@@ -53,6 +68,7 @@
       border-radius: 10px;
       text-decoration: none;
       transition: background-color 0.3s;
+      display: inline-block;
     }
     .button:hover {
       background-color: #333;
@@ -63,12 +79,14 @@
   <div class="container">
     <img src="Pawley%20vol%202.png" alt="Pawley logo" class="logo">
     <div id="output"></div>
+    <div class="contact-info" id="contact"></div>
     <div class="button-container" id="call-button"></div>
   </div>
 
   <script>
     const output = document.getElementById("output");
     const callButton = document.getElementById("call-button");
+    const contact = document.getElementById("contact");
     const lang = navigator.language.startsWith("fi") ? "fi" : "en";
 
     const data = decodeURIComponent(location.hash.substring(1)).split("|");
@@ -77,28 +95,36 @@
 
       const translations = {
         fi: {
-          title: `Löytynyt lemmikki: ${dog}`,
+          petLabel: "Löytynyt lemmikki",
+          infoLabel: "Tärkeää tietoa lemmikistä",
           owner: `Omistaja: ${name}`,
           phone: `Puhelin: ${phone}`,
-          allergy: `Allergiat: ${allergy}`,
-          button: `Soita omistajalle`
+          button: `Soita omistajalle`,
+          allergy: `${allergy}`
         },
         en: {
-          title: `Found pet: ${dog}`,
+          petLabel: "Found pet",
+          infoLabel: "Important information about the pet",
           owner: `Owner: ${name}`,
           phone: `Phone: ${phone}`,
-          allergy: `Allergies: ${allergy}`,
-          button: `Call owner`
+          button: `Call owner`,
+          allergy: `${allergy}`
         }
       };
 
       const t = translations[lang];
       output.innerHTML = `
-        <h1>${t.title}</h1>
-        <div class="info">${t.owner}</div>
-        <div class="info">${t.phone}</div>
+        <div class="pet-name">${dog}</div>
+        <div class="found-label">${t.petLabel}</div>
+        <div class="section-title">${t.infoLabel}</div>
         <div class="info">${t.allergy}</div>
       `;
+
+      contact.innerHTML = `
+        <div class="info">${t.owner}</div>
+        <div class="info">${t.phone}</div>
+      `;
+
       callButton.innerHTML = `<a class="button" href="tel:${phone}">${t.button}</a>`;
     } else {
       output.innerHTML = `<p>Virhe: tietojen lukeminen epäonnistui.</p>`;
