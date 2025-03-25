@@ -89,7 +89,9 @@
     const contact = document.getElementById("contact");
     const lang = navigator.language.startsWith("fi") ? "fi" : "en";
 
-    const data = decodeURIComponent(location.hash.substring(1)).split("|");
+    const raw = location.hash.substring(1).replace(/\+/g, ' ');
+    const data = decodeURIComponent(raw).split("|");
+
     if (data.length >= 4) {
       const [name, phone, dog, allergy] = data;
 
