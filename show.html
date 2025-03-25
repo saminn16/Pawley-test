@@ -3,32 +3,93 @@
 <head>
   <meta charset="UTF-8">
   <title>Pawley – Löydetty koira</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body { font-family: sans-serif; text-align: center; padding: 2rem; background: #f9f9f9; }
-    .box { background: white; border: 1px solid #ccc; border-radius: 8px; padding: 2rem; display: inline-block; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-    h1 { margin-bottom: 1rem; }
-    .info { margin: 0.7rem 0; font-size: 1.1rem; }
-    .button { margin-top: 1.5rem; padding: 0.8rem 1.5rem; font-size: 1.1rem; background-color: #000; color: #fff; border: none; border-radius: 5px; text-decoration: none; display: inline-block; }
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #fefefe;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    .container {
+      padding: 2rem;
+      max-width: 600px;
+      margin: auto;
+    }
+    .logo {
+      max-width: 180px;
+      margin: 2rem auto 1.5rem;
+      display: block;
+    }
+    h1 {
+      font-size: 2rem;
+      margin: 1rem 0;
+    }
+    .info {
+      font-size: 1.25rem;
+      margin: 1rem 0;
+    }
+    .button {
+      display: inline-block;
+      margin-top: 3rem;
+      padding: 1rem 2rem;
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: #fff;
+      background-color: #000;
+      border: none;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+    .button:hover {
+      background-color: #333;
+    }
   </style>
 </head>
 <body>
-  <div class="box" id="output"></div>
+  <div class="container">
+    <img src="https://raw.githubusercontent.com/saminn16/Pawley-test/main/assets_images/Pawley%20vol%202.png" alt="Pawley logo" class="logo">
+    <div id="output"></div>
+  </div>
 
   <script>
     const output = document.getElementById("output");
-    const data = decodeURIComponent(location.hash.substring(1)).split("|");
+    const lang = navigator.language.startsWith("fi") ? "fi" : "en";
 
+    const data = decodeURIComponent(location.hash.substring(1)).split("|");
     if (data.length >= 4) {
       const [name, phone, dog, allergy] = data;
+
+      const translations = {
+        fi: {
+          title: `${dog}`,
+          owner: `Omistaja: ${name}`,
+          phone: `Puhelin: ${phone}`,
+          allergy: `Allergiat: ${allergy}`,
+          button: `Soita omistajalle`
+        },
+        en: {
+          title: `${dog}`,
+          owner: `Owner: ${name}`,
+          phone: `Phone: ${phone}`,
+          allergy: `Allergies: ${allergy}`,
+          button: `Call owner`
+        }
+      };
+
+      const t = translations[lang];
       output.innerHTML = `
-        <h1>${dog}</h1>
-        <div class="info"><strong>Omistaja:</strong> ${name}</div>
-        <div class="info"><strong>Puhelin:</strong> ${phone}</div>
-        <div class="info"><strong>Allergiat:</strong> ${allergy}</div>
-        <a class="button" href="tel:${phone}">Soita omistajalle</a>
+        <h1>${t.title}</h1>
+        <div class="info">${t.owner}</div>
+        <div class="info">${t.phone}</div>
+        <div class="info">${t.allergy}</div>
+        <a class="button" href="tel:${phone}">${t.button}</a>
       `;
     } else {
-      output.innerHTML = `<p>Virhe: tiedot puuttuvat tai ovat väärässä muodossa.</p>`;
+      output.innerHTML = `<p>Virhe: tietojen lukeminen epäonnistui.</p>`;
     }
   </script>
 </body>
