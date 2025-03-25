@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <title>Pawley – Löydetty koira</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 2rem; background: #f9f9f9; }
+    .box { background: white; border: 1px solid #ccc; border-radius: 8px; padding: 2rem; display: inline-block; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    h1 { margin-bottom: 1rem; }
+    .info { margin: 0.7rem 0; font-size: 1.1rem; }
+    .button { margin-top: 1.5rem; padding: 0.8rem 1.5rem; font-size: 1.1rem; background-color: #000; color: #fff; border: none; border-radius: 5px; text-decoration: none; display: inline-block; }
+  </style>
+</head>
+<body>
+  <div class="box" id="output"></div>
+
+  <script>
+    const output = document.getElementById("output");
+    const data = decodeURIComponent(location.hash.substring(1)).split("|");
+
+    if (data.length >= 4) {
+      const [name, phone, dog, allergy] = data;
+      output.innerHTML = `
+        <h1>${dog}</h1>
+        <div class="info"><strong>Omistaja:</strong> ${name}</div>
+        <div class="info"><strong>Puhelin:</strong> ${phone}</div>
+        <div class="info"><strong>Allergiat:</strong> ${allergy}</div>
+        <a class="button" href="tel:${phone}">Soita omistajalle</a>
+      `;
+    } else {
+      output.innerHTML = `<p>Virhe: tiedot puuttuvat tai ovat väärässä muodossa.</p>`;
+    }
+  </script>
+</body>
+</html>
