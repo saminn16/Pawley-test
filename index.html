@@ -40,33 +40,33 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 2rem 1rem;
+      padding: 2rem 1rem 0;
       max-width: 600px;
       margin: 0 auto;
       position: relative;
       z-index: 1;
     }
     .greeting {
-      font-size: 1.1rem;
+      font-size: 1.25rem;
       color: #666;
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.35rem;
     }
     .pet-name {
       font-family: 'PawleyFont', sans-serif;
-      font-size: 4rem;
+      font-size: 4.5rem;
       font-weight: normal;
       letter-spacing: 1px;
-      margin: 0 0 0.5rem;
+      margin: 0.5rem 0 1rem;
       text-transform: uppercase;
     }
     .lost-message {
-      font-size: 1.1rem;
+      font-size: 1.25rem;
       color: #666;
-      margin-bottom: 2.5rem;
+      margin-bottom: 3rem;
     }
     .button {
-      padding: 1rem 2rem;
-      font-size: 1.25rem;
+      padding: 1.1rem 2.2rem;
+      font-size: 1.35rem;
       font-weight: bold;
       color: #fff;
       background-color: #000;
@@ -80,30 +80,31 @@
       background-color: #333;
     }
     .owner-info {
-      margin-top: 1.5rem;
+      margin-top: 1.75rem;
     }
     .info {
-      font-size: 1.05rem;
-      margin: 0.2rem 0;
+      font-size: 1.15rem;
+      margin: 0.3rem 0;
       color: #444;
     }
     .section-title {
-      font-size: 1rem;
+      font-size: 1.05rem;
       font-weight: 600;
       margin-top: 3rem;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.5rem;
       color: #555;
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
     .allergy-info {
-      font-size: 1.05rem;
+      font-size: 1.15rem;
       color: #444;
     }
     .logo {
       max-width: 120px;
-      margin-top: 3rem;
-      margin-bottom: 0;
+      margin-top: auto;
+      margin-bottom: 1.5rem;
+      padding-top: 2rem;
       opacity: 0.6;
     }
   </style>
@@ -133,24 +134,21 @@
           greeting: "Hei! Nimeni on:",
           lostMessage: "Olen eksynyt, ole hyvä ja ota yhteyttä omistajaani.",
           owner: `Omistaja: ${name}`,
-          phone: `${phone}`,
-          button: "Soita omistajalle",
+          button: `Soita omistajalle — ${phone}`,
           infoLabel: "Tärkeää tietoa",
         },
         sv: {
           greeting: "Hej! Mitt namn är:",
           lostMessage: "Jag är vilse, kontakta gärna min ägare.",
           owner: `Ägare: ${name}`,
-          phone: `${phone}`,
-          button: "Ring ägaren",
+          button: `Ring ägaren — ${phone}`,
           infoLabel: "Viktig information",
         },
         en: {
           greeting: "Hi! My name is:",
           lostMessage: "I'm lost, please contact my owner.",
           owner: `Owner: ${name}`,
-          phone: `${phone}`,
-          button: "Call owner",
+          button: `Call owner — ${phone}`,
           infoLabel: "Important info",
         }
       };
@@ -163,7 +161,6 @@
       callButton.innerHTML = `<a class="button" href="tel:${phone}">${t.button}</a>`;
       contact.innerHTML = `
         <div class="info">${t.owner}</div>
-        <div class="info">${t.phone}</div>
       `;
       allergy.innerHTML = `
         <div class="section-title">${t.infoLabel}</div>
