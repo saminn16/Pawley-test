@@ -20,6 +20,17 @@
       font-weight: normal;
       font-style: normal;
     }
+    .bg-pattern {
+      position: fixed;
+      inset: 0;
+      background-image: url('favicon.svg');
+      background-repeat: repeat;
+      background-size: 160px 160px;
+      background-position: 40px 40px;
+      opacity: 0.045;
+      pointer-events: none;
+      z-index: 0;
+    }
     .container {
       flex: 1;
       display: flex;
@@ -29,41 +40,25 @@
       padding: 1rem;
       max-width: 600px;
       margin: 0 auto;
-    }
-    .logo {
-      max-width: 250px;
-      margin-top: 2rem;
-      margin-bottom: 8rem;
+      position: relative;
+      z-index: 1;
     }
     .pet-name {
       font-family: 'PawleyFont', sans-serif;
       font-size: 4rem;
       font-weight: normal;
       letter-spacing: 1px;
+      margin-top: 3rem;
       margin-bottom: 0.5rem;
       text-transform: uppercase;
     }
     .found-label {
       font-size: 1.1rem;
-      margin-bottom: 3rem;
+      margin-bottom: 2rem;
       color: #666;
     }
-    .section-title {
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-top: 3rem;
-      margin-bottom: 0.5rem;
-    }
-    .info {
-      font-size: 1.1rem;
-      margin: 0.2rem 0;
-    }
-    .contact-info {
-      margin-top: auto;
-      margin-bottom: 1rem;
-    }
     .button-container {
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
     }
     .button {
       padding: 1rem 2rem;
@@ -80,28 +75,46 @@
     .button:hover {
       background-color: #333;
     }
+    .contact-info {
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    .info {
+      font-size: 1.1rem;
+      margin: 0.2rem 0;
+    }
+    .logo {
+      max-width: 200px;
+      margin-top: auto;
+      margin-bottom: 2rem;
+      padding-top: 3rem;
+    }
   </style>
 </head>
 <body>
+  <div class="bg-pattern"></div>
   <div class="container">
-    <img src="snoutley.svg" alt="Snoutley logo" class="logo">
     <div id="output"></div>
-    <div class="contact-info" id="contact"></div>
     <div class="button-container" id="call-button"></div>
+    <div class="contact-info" id="contact"></div>
+    <div id="allergy"></div>
+    <img src="snoutley.svg" alt="Snoutley logo" class="logo">
   </div>
-
   <script>
     const output = document.getElementById("output");
     const callButton = document.getElementById("call-button");
     const contact = document.getElementById("contact");
+    const allergy = document.getElementById("allergy");
     const lang = navigator.language.startsWith("fi") ? "fi" : "en";
-
     const raw = location.hash.substring(1).replace(/\+/g, ' ');
     const data = decodeURIComponent(raw).split("|");
-
     if (data.length >= 4) {
-      const [name, phone, dog, allergy] = data;
-
+      const [name, phone, dog, allergyVal] = data;
       const translations = {
         fi: {
           petLabel: "Löytynyt lemmikki",
@@ -109,7 +122,6 @@
           owner: `Omistaja: ${name}`,
           phone: `Puhelin: ${phone}`,
           button: `Soita omistajalle`,
-          allergy: `${allergy}`
         },
         en: {
           petLabel: "Found pet",
@@ -117,24 +129,22 @@
           owner: `Owner: ${name}`,
           phone: `Phone: ${phone}`,
           button: `Call owner`,
-          allergy: `${allergy}`
         }
       };
-
       const t = translations[lang];
       output.innerHTML = `
         <div class="pet-name">${dog}</div>
         <div class="found-label">${t.petLabel}</div>
-        <div class="section-title">${t.infoLabel}</div>
-        <div class="info">${t.allergy}</div>
       `;
-
+      callButton.innerHTML = `<a class="button" href="tel:${phone}">${t.button}</a>`;
       contact.innerHTML = `
         <div class="info">${t.owner}</div>
         <div class="info">${t.phone}</div>
       `;
-
-      callButton.innerHTML = `<a class="button" href="tel:${phone}">${t.button}</a>`;
+      allergy.innerHTML = `
+        <div class="section-title">${t.infoLabel}</div>
+        <div class="info">${allergyVal}</div>
+      `;
     } else {
       output.innerHTML = `<p>Virhe: tietojen lukeminen epäonnistui.</p>`;
     }
