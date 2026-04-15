@@ -29,6 +29,16 @@
       z-index: 0;
       opacity: 0.07;
     }
+    #bg-fade {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 35%;
+      background: linear-gradient(to bottom, transparent, #fefefe);
+      pointer-events: none;
+      z-index: 1;
+    }
     .container {
       flex: 1;
       display: flex;
@@ -36,17 +46,16 @@
       align-items: center;
       justify-content: flex-end;
       text-align: center;
-      padding: 2rem 1rem 0;
+      padding: 2rem 1rem 8vh;
       max-width: 600px;
       margin: 0 auto;
       position: relative;
-      z-index: 1;
+      z-index: 2;
     }
     .content {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-bottom: 20vh;
     }
     .greeting {
       font-size: 1.25rem;
@@ -127,6 +136,7 @@
 </head>
 <body>
   <canvas id="bg-canvas"></canvas>
+  <div id="bg-fade"></div>
   <div class="container">
     <div class="content">
       <div id="output"></div>
@@ -151,21 +161,21 @@
         fi: {
           greeting: "Hei! Nimeni on:",
           lostMessage: "Olen eksynyt, ole hyvä ja ota yhteyttä omistajaani.",
-          owner: `Omistaja: ${name}`,
+          owner: Omistaja: ${name},
           button: "Soita omistajalle",
           infoLabel: "Tärkeää tietoa",
         },
         sv: {
           greeting: "Hej! Mitt namn är:",
           lostMessage: "Jag är vilse, kontakta gärna min ägare.",
-          owner: `Ägare: ${name}`,
+          owner: Ägare: ${name},
           button: "Ring ägaren",
           infoLabel: "Viktig information",
         },
         en: {
           greeting: "Hi! My name is:",
           lostMessage: "I'm lost, please contact my owner.",
-          owner: `Owner: ${name}`,
+          owner: Owner: ${name},
           button: "Call owner",
           infoLabel: "Important info",
         }
@@ -189,7 +199,7 @@
         <div class="allergy-info">${allergyVal}</div>
       `;
     } else {
-      output.innerHTML = `<p>Virhe: tietojen lukeminen epäonnistui.</p>`;
+      output.innerHTML = <p>Virhe: tietojen lukeminen epäonnistui.</p>;
     }
 
     // Seeded random — always produces the same pattern
@@ -216,8 +226,8 @@
       const rows = Math.ceil(canvas.height / spacing) + 2;
       for (let row = 0; row < rows; row++) {
         for (let col = 0; col < cols; col++) {
-          const x = col * spacing + (rand() * 20 - 10);
-          const y = row * spacing + (col % 2 === 0 ? 0 : spacing / 2) + (rand() * 20 - 10);
+          const x = col * spacing + (rand() * 40 - 20);
+          const y = row * spacing + (col % 2 === 0 ? 0 : spacing / 2) + (rand() * 40 - 20);
           const angle = rand() * Math.PI * 2;
           ctx.save();
           ctx.translate(x, y);
