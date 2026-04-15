@@ -161,21 +161,21 @@
         fi: {
           greeting: "Hei! Nimeni on:",
           lostMessage: "Olen eksynyt, ole hyvä ja ota yhteyttä omistajaani.",
-          owner: Omistaja: ${name},
+          owner: `Omistaja: ${name}`,
           button: "Soita omistajalle",
           infoLabel: "Tärkeää tietoa",
         },
         sv: {
           greeting: "Hej! Mitt namn är:",
           lostMessage: "Jag är vilse, kontakta gärna min ägare.",
-          owner: Ägare: ${name},
+          owner: `Ägare: ${name}`,
           button: "Ring ägaren",
           infoLabel: "Viktig information",
         },
         en: {
           greeting: "Hi! My name is:",
           lostMessage: "I'm lost, please contact my owner.",
-          owner: Owner: ${name},
+          owner: `Owner: ${name}`,
           button: "Call owner",
           infoLabel: "Important info",
         }
@@ -199,7 +199,7 @@
         <div class="allergy-info">${allergyVal}</div>
       `;
     } else {
-      output.innerHTML = <p>Virhe: tietojen lukeminen epäonnistui.</p>;
+      output.innerHTML = `<p>Virhe: tietojen lukeminen epäonnistui.</p>`;
     }
 
     // Seeded random — always produces the same pattern
