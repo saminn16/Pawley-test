@@ -9,8 +9,8 @@
       height: 100%;
       margin: 0;
       font-family: "Segoe UI", sans-serif;
-      background-color: #fefefe;
-      color: #333;
+      background-color: #fefcf9;
+      color: #333333;
       display: flex;
       flex-direction: column;
     }
@@ -52,7 +52,7 @@
       font-size: 1.1rem;
       color: #666;
       margin-bottom: 0.2rem;
-      text-shadow: 0 0 12px #fefefe, 0 0 20px #fefefe, 0 0 30px #fefefe;
+      text-shadow: 0 0 12px #fefcf9, 0 0 20px #fefcf9, 0 0 30px #fefcf9;
     }
     .pet-name {
       font-family: 'PawleyFont', sans-serif;
@@ -61,20 +61,20 @@
       letter-spacing: 1px;
       margin: 0.4rem 0 0.8rem;
       text-transform: uppercase;
-      text-shadow: 0 0 12px #fefefe, 0 0 20px #fefefe, 0 0 30px #fefefe;
+      text-shadow: 0 0 12px #fefcf9, 0 0 20px #fefcf9, 0 0 30px #fefcf9;
     }
     .lost-message {
       font-size: 1.1rem;
       color: #666;
       margin-bottom: 2.5rem;
-      text-shadow: 0 0 12px #fefefe, 0 0 20px #fefefe, 0 0 30px #fefefe;
+      text-shadow: 0 0 12px #fefcf9, 0 0 20px #fefcf9, 0 0 30px #fefcf9;
     }
     .button {
       padding: 1.1rem 2.2rem;
       font-size: 1.35rem;
       font-weight: bold;
       color: #fff;
-      background-color: #000;
+      background-color: #ee8b00;
       border: none;
       border-radius: 10px;
       text-decoration: none;
@@ -85,12 +85,12 @@
       gap: 0.2rem;
     }
     .button:hover {
-      background-color: #333;
+      background-color: #d17c00;
     }
     .button-number {
       font-size: 1rem;
       font-weight: normal;
-      opacity: 0.85;
+      opacity: 0.9;
     }
     .owner-info {
       margin-top: 2rem;
@@ -99,7 +99,7 @@
       font-size: 1.1rem;
       margin: 0.2rem 0;
       color: #444;
-      text-shadow: 0 0 12px #fefefe, 0 0 20px #fefefe, 0 0 30px #fefefe;
+      text-shadow: 0 0 12px #fefcf9, 0 0 20px #fefcf9, 0 0 30px #fefcf9;
     }
     .section-title {
       font-size: 1rem;
@@ -109,18 +109,33 @@
       color: #555;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      text-shadow: 0 0 12px #fefefe, 0 0 20px #fefefe, 0 0 30px #fefefe;
+      text-shadow: 0 0 12px #fefcf9, 0 0 20px #fefcf9, 0 0 30px #fefcf9;
     }
     .allergy-info {
       font-size: 1.1rem;
       color: #444;
-      text-shadow: 0 0 12px #fefefe, 0 0 20px #fefefe, 0 0 30px #fefefe;
+      text-shadow: 0 0 12px #fefcf9, 0 0 20px #fefcf9, 0 0 30px #fefcf9;
     }
     .logo {
       max-width: 100px;
       margin-top: 2.5rem;
-      margin-bottom: 1rem;
+      margin-bottom: 0.3rem;
       opacity: 0.6;
+    }
+    .powered-by {
+      font-size: 0.75rem;
+      color: #aaa;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 12px #fefcf9, 0 0 20px #fefcf9;
+    }
+    .powered-by a {
+      color: #aaa;
+      text-decoration: none;
+      border-bottom: 1px solid #ddd;
+    }
+    .powered-by a:hover {
+      color: #888;
+      border-bottom-color: #aaa;
     }
   </style>
 </head>
@@ -133,6 +148,7 @@
       <div class="owner-info" id="contact"></div>
       <div id="allergy"></div>
       <img src="snoutley.svg" alt="Snoutley logo" class="logo">
+      <div class="powered-by">powered by <a href="https://snoutley.fi" target="_blank">Snoutley</a></div>
     </div>
   </div>
   <script>
@@ -153,6 +169,7 @@
           owner: `Omistaja: ${name}`,
           button: "Soita omistajalle",
           infoLabel: "Tärkeää tietoa",
+          poweredBy: "powered by"
         },
         sv: {
           greeting: "Hej! Mitt namn är:",
@@ -160,6 +177,7 @@
           owner: `Ägare: ${name}`,
           button: "Ring ägaren",
           infoLabel: "Viktig information",
+          poweredBy: "powered by"
         },
         en: {
           greeting: "Hi! My name is:",
@@ -167,6 +185,7 @@
           owner: `Owner: ${name}`,
           button: "Call owner",
           infoLabel: "Important info",
+          poweredBy: "powered by"
         }
       };
       const t = translations[lang];
