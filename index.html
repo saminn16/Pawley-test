@@ -46,7 +46,7 @@
       flex-direction: column;
       align-items: center;
       margin-top: auto;
-      padding-bottom: 1rem;
+      padding-bottom: 4vh;
     }
     .greeting {
       font-size: 1.1rem;
@@ -55,7 +55,7 @@
       text-shadow: 0 0 12px #fefcf9, 0 0 20px #fefcf9, 0 0 30px #fefcf9;
     }
     .pet-name {
-      font-family: 'PawleyFont', sans-serif;
+      font-family: 'SnoutleyFont', sans-serif;
       font-size: 3.8rem;
       font-weight: normal;
       letter-spacing: 1px;
@@ -102,14 +102,13 @@
       text-shadow: 0 0 12px #fefcf9, 0 0 20px #fefcf9, 0 0 30px #fefcf9;
     }
     .section-title {
-      font-size: 1rem;
-      font-weight: 600;
+      font-size: 0.85rem;
+      font-weight: 400;
       margin-top: 2rem;
       margin-bottom: 0.3rem;
-      color: #555;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      text-shadow: 0 0 12px #fefcf9, 0 0 20px #fefcf9, 0 0 30px #fefcf9;
+      color: #999;
+      letter-spacing: 0.03em;
+      text-shadow: 0 0 12px #fefcf9, 0 0 20px #fefcf9;
     }
     .allergy-info {
       font-size: 1.1rem;
@@ -119,17 +118,17 @@
     .logo {
       max-width: 100px;
       margin-top: 2.5rem;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.8rem;
       opacity: 0.6;
     }
     .powered-by {
       font-size: 0.75rem;
-      color: #aaa;
-      margin-bottom: 1rem;
+      color: #bbb;
+      margin-bottom: 0;
       text-shadow: 0 0 12px #fefcf9, 0 0 20px #fefcf9;
     }
     .powered-by a {
-      color: #aaa;
+      color: #bbb;
       text-decoration: none;
       border-bottom: 1px solid #ddd;
     }
@@ -152,11 +151,15 @@
     </div>
   </div>
   <script>
+    const capitalize = s => s.charAt(0).toUpperCase() + s.slice(1);
+
     const output = document.getElementById("output");
     const callButton = document.getElementById("call-button");
     const contact = document.getElementById("contact");
     const allergy = document.getElementById("allergy");
-    const lang = navigator.language.startsWith("sv") ? "sv" :
+    const lang = navigator.language.startsWith("ru") ? "ru" :
+                 navigator.language.startsWith("uk") ? "uk" :
+                 navigator.language.startsWith("sv") ? "sv" :
                  navigator.language.startsWith("fi") ? "fi" : "en";
     const raw = location.hash.substring(1).replace(/\+/g, ' ');
     const data = decodeURIComponent(raw).split("|");
@@ -166,26 +169,37 @@
         fi: {
           greeting: "Hei! Nimeni on:",
           lostMessage: "Olen eksynyt, ole hyvä ja ota yhteyttä omistajaani.",
-          owner: `Omistaja: ${name}`,
+          owner: `Omistaja: ${capitalize(name)}`,
           button: "Soita omistajalle",
           infoLabel: "Tärkeää tietoa",
-          poweredBy: "powered by"
         },
         sv: {
           greeting: "Hej! Mitt namn är:",
           lostMessage: "Jag är vilse, kontakta gärna min ägare.",
-          owner: `Ägare: ${name}`,
+          owner: `Ägare: ${capitalize(name)}`,
           button: "Ring ägaren",
           infoLabel: "Viktig information",
-          poweredBy: "powered by"
+        },
+        ru: {
+          greeting: "Привет! Меня зовут:",
+          lostMessage: "Я потерялся, пожалуйста, свяжитесь с моим владельцем.",
+          owner: `Владелец: ${capitalize(name)}`,
+          button: "Позвонить владельцу",
+          infoLabel: "Важная информация",
+        },
+        uk: {
+          greeting: "Привіт! Мене звати:",
+          lostMessage: "Я загубився, будь ласка, зв'яжіться з моїм власником.",
+          owner: `Власник: ${capitalize(name)}`,
+          button: "Зателефонувати власнику",
+          infoLabel: "Важлива інформація",
         },
         en: {
           greeting: "Hi! My name is:",
           lostMessage: "I'm lost, please contact my owner.",
-          owner: `Owner: ${name}`,
+          owner: `Owner: ${capitalize(name)}`,
           button: "Call owner",
           infoLabel: "Important info",
-          poweredBy: "powered by"
         }
       };
       const t = translations[lang];
